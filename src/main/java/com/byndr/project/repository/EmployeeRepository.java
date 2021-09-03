@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.byndr.project.model.Employee;
 
 @Repository
+//repository that extends JpaRepository 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 }
