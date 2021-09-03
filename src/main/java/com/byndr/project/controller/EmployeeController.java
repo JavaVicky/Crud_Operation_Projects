@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.byndr.project.model.Employee;
 import com.byndr.project.service.EmployeeService;
-
+//mark class as Controller
 @Controller
 public class EmployeeController {
-
+	//autowire the EmployeeService class
 	@Autowired
 	private EmployeeService employeeService;
 
@@ -26,22 +26,23 @@ public class EmployeeController {
 	public String viewHomePage(Model model) {
 		return findPaginated(1, "firstName", "asc", model);
 	}
-
+	//creating a get mapping that retrieves all the emloyees detail from the db 
 	@GetMapping("/showNewEmployeeForm")
 	public String showNewEmployeeForm(Model model) {
 		// create model attribute to bind form data
 		Employee employee = new Employee();
 		model.addAttribute("employee", employee);
+		//it will retuen new_employee.html page
 		return "new_employee";
 	}
-
+	//creating post mapping that post the emploee detail in the db 
 	@PostMapping("/saveEmployee")
 	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
 		// save employee to database
 		employeeService.saveEmployee(employee);
 		return "redirect:/";
 	}
-
+	//creating a get mapping that retrieves the detail of a specific employee id  
 	@GetMapping("/showFormForUpdate/{id}")
 	public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
 
@@ -50,9 +51,10 @@ public class EmployeeController {
 
 		// set employee as a model attribute to pre-populate the form
 		model.addAttribute("employee", employee);
+		//it will retuen update_employee.html page
 		return "update_employee";
 	}
-
+	//creating a delete mapping that deletes a specified emloyee id 
 	@GetMapping("/deleteEmployee/{id}")
 	public String deleteEmployee(@PathVariable(value = "id") long id) {
 
@@ -78,6 +80,7 @@ public class EmployeeController {
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
 		model.addAttribute("listEmployees", listEmployees);
+		//it will retuen index.html page
 		return "index";
 	}
 }
