@@ -7,10 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//mark class as an entity   
 @Entity
 @Table(name = "employees")
 public class Employee {
 
+	// Defining employee id as primary key
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
